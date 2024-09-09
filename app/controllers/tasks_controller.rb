@@ -1,27 +1,38 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @tasks = Task.all
+  end
+
+  def new
+  end
+
+  def show
+    @task = Task.find(params[:id])
+  end
+
   def create
     @todo_list = current_user.todo_lists.find(params[:todo_list_id])
     @task = @todo_list.tasks.new(task_params)
     @task.user = current_user
 
     if @task.save
-      redirect_to todo_lists_path, notice: 'Task created!'
+      redirect_to todo_lists_path, notice: "Task created!"
     else
-      render 'todo_lists/show'
+      render "todo_lists/show"
     end
   end
 
   def update
     @task = Task.find(params[:id])
-    @task.update(completed: params[:completed] == 'true')
-    redirect_to todo_lists_path, notice: 'Task updated!'
+    @task.update(completed: params[:completed] == "true")
+    redirect_to todo_lists_path, notice: "Task updated!"
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:title)
+    params.require(:task).permit(:title, :completed, :todo_list_id, :user_id,)
   end
 end
