@@ -6,6 +6,8 @@ class TodoListsController < ApplicationController
     @todo_lists = current_user.todo_lists
   end
   def show
+    @tasks = @todo_list.tasks
+    @task = @todo_list.tasks.new
   end
 
   def edit
@@ -44,6 +46,6 @@ class TodoListsController < ApplicationController
   end
 
   def todo_list_params
-    params.require(:todo_list).permit(:name)
+    params.require(:todo_list).permit(:name, :user_id)
   end
 end

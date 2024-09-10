@@ -1,7 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render partial: 'todo_list', collection: @todo_lists %>
+<%= @todo_list.name %>
+<br />
 
+<% if @tasks.any? %>
+  <%= render partial: "tasks/task", collection: @tasks %>
+<% end %>
+
+<%= render partial: "tasks/form", locals: { task: @task } %>
 
 <div>
   <%= link_to "Edit this todo list", edit_todo_list_path(@todo_list) %> |

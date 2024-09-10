@@ -2,10 +2,10 @@
 
 <h1>New task</h1>
 
-<%= render "form", task: @task %>
+<%= render partial: "tasks/form", locals: {task: @task} %>
 
 <br>
 
 <div>
-  <%= link_to "Back to tasks", tasks_path %>
+  <%= link_to "Back to Lists", todo_lists_path %>
 </div>
