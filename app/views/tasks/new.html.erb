@@ -1,11 +1,14 @@
-<% content_for :title, "New task" %>
+<%= turbo_frame_tag :new_task do %>
 
-<h1>New task</h1>
+  <% content_for :title, "New task" %>
 
-<%= render partial: "tasks/form", locals: {task: @task} %>
+  <h1>New task</h1>
 
-<br>
+  <%= render "form", task: @task %>
 
-<div>
-  <%= link_to "Back to Lists", todo_lists_path %>
-</div>
+  <br>
+
+  <div>
+    <%= link_to "Back to Lists", todo_lists_path %>
+  </div>
+<% end %>

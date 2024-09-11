@@ -6,8 +6,5 @@
   <div id="tasks">
     <% @tasks.each do |task| %>
       <%= render task %>
-      <p>
-        <%= link_to "New Task", new_todo_list_task_path(@todo_list) %>
-      </p>
     <% end %>
   </div>

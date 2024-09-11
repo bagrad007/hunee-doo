@@ -1,17 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
 <%= @todo_list.name %>
-<br />
+<br>
 
-<% if @tasks.any? %>
-  <%= render partial: "tasks/task", collection: @tasks %>
-<% end %>
+ <%= turbo_frame_tag :new_task, src: new_todo_list_task_path(@todo_list) %>
 
-<%= render partial: "tasks/form", locals: { task: @task } %>
-
+<br>
 <div>
   <%= link_to "Edit this todo list", edit_todo_list_path(@todo_list) %> |
   <%= link_to "Back to todo lists", todo_lists_path %>
 
   <%= button_to "Destroy this todo list", @todo_list, method: :delete %>
 </div>
+<div>Task Log</div>
+<% if !@tasks.empty? %>
+  <%= render template: "tasks/show", locals: {task: @task} %>
+<% end %>
