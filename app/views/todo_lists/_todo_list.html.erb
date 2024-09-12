@@ -1,12 +1,16 @@
-<div id="<%= dom_id todo_list %>">
-  <p>
-    <strong>Name:</strong>
+<tr>
+  <th>
+    <strong>Name: |</strong>
+  </th>
+  <th>
+    <strong>User: |</strong>
+  </th>
+</tr>
+<tr>
+  <td>
     <%= todo_list.name %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
+  </td>
+  <td>
     <%= todo_list.user.email %>
-  </p>
-
-</div>
+  </td>
+</tr>

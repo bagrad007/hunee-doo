@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_08_002657) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_11_232352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,11 +18,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_002657) do
     t.string "title"
     t.boolean "completed", default: false
     t.bigint "todo_list_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["todo_list_id"], name: "index_tasks_on_todo_list_id"
-    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "todo_lists", force: :cascade do |t|
@@ -46,6 +44,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_08_002657) do
   end
 
   add_foreign_key "tasks", "todo_lists"
-  add_foreign_key "tasks", "users"
   add_foreign_key "todo_lists", "users"
 end

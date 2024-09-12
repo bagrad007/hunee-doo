@@ -5,6 +5,8 @@
 <h1>Tasks</h1>
   <div id="tasks">
     <% @tasks.each do |task| %>
+    <table>
       <%= render task %>
+    </table>
     <% end %>
   </div>

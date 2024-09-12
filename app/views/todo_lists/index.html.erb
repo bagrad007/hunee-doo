@@ -6,7 +6,9 @@
 
 <div id="todo_lists">
   <% @todo_lists.each do |todo_list| %>
+  <table>
     <%= render todo_list %>
+  </table>
     <p>
       <%= link_to "Show this todo list", todo_list %>
     </p>

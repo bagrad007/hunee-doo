@@ -1,14 +1,14 @@
-<div id="<%= dom_id task %>">
+<tr>
   <% if task.title %>
-  <p>
-    <strong>Title:</strong>
-    <%= task.title %>
-  </p>
-
-  <p>
-    <strong>Completed:</strong>
-    <%= task.completed %>
-  </p>
-  
+    <th>
+      <strong>Title:</strong>
+      <strong>Completed:</strong>
+    </th>
+    <td>
+      <%= task.title %>
+    </td>
+    <td>
+      <%= task.completed %>
+    </td>
 <% end %>
-</div>
+</tr>
