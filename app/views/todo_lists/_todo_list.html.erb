@@ -1,9 +1,9 @@
 <tr>
   <th>
-    <strong>Name: |</strong>
+    <strong>Name </strong>
   </th>
   <th>
-    <strong>User: |</strong>
+    <strong>User </strong>
   </th>
 </tr>
 <tr>
@@ -12,5 +12,15 @@
   </td>
   <td>
     <%= todo_list.user.email %>
+  </td>
+  
+  <td>
+    <%= link_to "Show", todo_list, class: "btn btn-success" %>
+  </td>
+  <td>
+    <%= link_to "Edit this todo list", edit_todo_list_path(todo_list), class: "btn btn-secondary" %>
+  </td>
+  <td>
+    <%= button_to "Destroy this todo list", todo_list, method: :delete, class: "btn btn-danger" %>
   </td>
 </tr>

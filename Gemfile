@@ -22,6 +22,7 @@ gem "dartsass-rails"
 gem "devise"
 
 gem "ostruct"
+gem 'pry'
 
 gem "bootstrap", "~> 5.3.0"
 # Use Redis adapter to run Action Cable in production

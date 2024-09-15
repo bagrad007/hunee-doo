@@ -6,13 +6,10 @@
 
 <div id="todo_lists">
   <% @todo_lists.each do |todo_list| %>
-  <table>
-    <%= render todo_list %>
-  </table>
-    <p>
-      <%= link_to "Show this todo list", todo_list %>
-    </p>
+    <table class="table table-bordered table-striped">
+      <%= render todo_list %>
+    </table>
   <% end %>
 </div>
 
-<%= link_to "New todo list", new_todo_list_path %>
+<%= link_to "New Todo List", new_todo_list_path, class: "btn btn-primary" %>

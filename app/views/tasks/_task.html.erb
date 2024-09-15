@@ -1,14 +1,24 @@
+
+
 <tr>
-  <% if task.title %>
+  <thead>
     <th>
       <strong>Title:</strong>
+    </th>
+    <th>
       <strong>Completed:</strong>
     </th>
-    <td>
+  </thead>
+</tr>
+
+<tbody>
+  <tr>
+    <td col>
       <%= task.title %>
     </td>
+    
     <td>
       <%= task.completed %>
     </td>
-<% end %>
-</tr>
+  </tr>
+</tbody>

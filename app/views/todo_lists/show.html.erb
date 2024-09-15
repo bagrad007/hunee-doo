@@ -3,12 +3,6 @@
 <%= @todo_list.name %>
 <br>
 
-<%= link_to "Create Task",  new_task_path(todo_list_id: @todo_list.id) %>
+  <%= link_to "Create Task",  new_task_path(todo_list_id: @todo_list.id) %>
 
 <br>
-<div>
-  <%= link_to "Edit this todo list", edit_todo_list_path(@todo_list) %> |
-  <%= link_to "Back to todo lists", todo_lists_path %>
-
-  <%= button_to "Destroy this todo list", @todo_list, method: :delete %>
-</div>

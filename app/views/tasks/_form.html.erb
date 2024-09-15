@@ -23,5 +23,6 @@
 
   <div>
     <%= form.submit %>
+    <%= form.hidden_field :todo_list_id, value: @todo_list.id %>
   </div>
 <% end %>

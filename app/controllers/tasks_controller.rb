@@ -4,23 +4,18 @@ class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :update, :edit, :destroy ]
 
   def index
-    @tasks = @todo_list.tasks.all
+    @tasks = current_user.tasks
   end
 
   def new
-    @todo_list = current_user.todo_lists.find(params[:todo_list_id])
     @task = @todo_list.tasks.new
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def show
   end
 
   def create
-    @task = @todo_list.tasks.new(task_params[:todo_list_id])
+    @task = @todo_list.tasks.new(todo_list_id: @todo_list.id, title: task_params[:title], completed: task_params[:completed])
 
     if @task.save
       redirect_to tasks_path, notice: "Task created!"
@@ -45,7 +40,8 @@ class TasksController < ApplicationController
   private
 
   def set_todo_list
-    @todo_list = current_user.todo_lists.find(params[:todo_list_id])
+    # binding.pry
+    @todo_list = current_user.todo_lists.find(task_params["todo_list_id"])
   end
 
   def set_task
