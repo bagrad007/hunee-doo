@@ -40,7 +40,6 @@ class TasksController < ApplicationController
   private
 
   def set_todo_list
-    # binding.pry
     @todo_list = current_user.todo_lists.find(task_params["todo_list_id"])
   end
 
