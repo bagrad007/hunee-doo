@@ -40,14 +40,14 @@ class TasksController < ApplicationController
   private
 
   def set_todo_list
-    @todo_list = current_user.todo_lists.find(task_params["todo_list_id"])
+    @todo_list = TodoList.find_by(id: params[:todo_list_id]) || TodoList.find_by(id: task_params[:todo_list_id])
   end
 
   def set_task
-    @task = Task.find(task_params[:id])
+    @task = Task.find(task_params["id"])
   end
 
   def task_params
-    params.require(:task).permit(:title, :completed, :todo_list_id)
+    params.require(:task).permit(:title, :completed, :todo_list_id, :check)
   end
 end
