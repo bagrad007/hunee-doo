@@ -1,12 +1,5 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Tasks" %>
-
-<h1>Tasks</h1>
-<table class="table">
-  <div id="tasks">
-    <% @tasks.each do |task| %>
-      <%= render task %>
-    <% end %>
-  </div>
-</table>
+<% @tasks.each do |task| %>
+  <%= render task %>
+<% end %>

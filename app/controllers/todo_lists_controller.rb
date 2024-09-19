@@ -7,7 +7,6 @@ class TodoListsController < ApplicationController
   end
   def show
     @tasks = @todo_list.tasks
-    @task = @todo_list.tasks.new
   end
 
   def edit

@@ -4,7 +4,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :update, :edit, :destroy ]
 
   def index
-    @tasks = current_user.tasks
+    if current_user
+      @tasks = current_user.tasks
+    end
   end
 
   def new
@@ -14,11 +16,15 @@ class TasksController < ApplicationController
   def show
   end
 
+  def edit
+    # binding.pry
+  end
+
   def create
     @task = @todo_list.tasks.new(todo_list_id: @todo_list.id, title: task_params[:title], completed: task_params[:completed])
 
     if @task.save
-      redirect_to tasks_path, notice: "Task created!"
+      redirect_to todo_list_path(@todo_list), notice: "Task created!"
     else
       @tasks = @todo_list.tasks
       render :new
@@ -27,14 +33,15 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "Task updated!"
+      redirect_to todo_list_path(@task.todo_list_id), notice: "Task updated!"
     else
-      redirect_to tasks_path, alert: "Task update failed!"
+      redirect_to todo_list_path(@task.todo_list_id), alert: "Task update failed!"
     end
   end
 
   def destroy
     @task.destroy
+    redirect_to todo_list_path(@task.todo_list_id), notice: "Task deleted!"
   end
 
   private
@@ -44,10 +51,10 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find(task_params["id"])
+    @task = Task.find(params[:id]) || Task.find(task_params["id"])
   end
 
   def task_params
-    params.require(:task).permit(:title, :completed, :todo_list_id, :check)
+    params.require(:task).permit(:title, :completed, :todo_list_id)
   end
 end

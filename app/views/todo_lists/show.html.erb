@@ -1,8 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
-<%= @todo_list.name %>
+<h1><%= @todo_list.name %></h1>
 <br>
-
-  <%= link_to "Create Task",  new_task_path(todo_list_id: @todo_list.id) %>
-
-<br>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>
+        Title
+      </th>
+      <th>
+        Completed Status
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "tasks/task", collection: @todo_list.tasks.where(completed: false) %>
+  </tbody>
+</table>
+<%= link_to "Create Task",  new_task_path(todo_list_id: @todo_list.id) %>
