@@ -1,18 +1,35 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Todo lists" %>
+<% content_for :title, "My Todos" %>
 
-<h1>Todo lists</h1>
+<h1>My Todos</h1>
 
   <table id="todo_lists" class="table table-bordered table-striped">
     <tr>
       <thead>
         <th>Name </th>
         <th>User </th>
+        <th>Shared With</th>
       </thead>
     </tr>
     <% @todo_lists.each do |todo_list| %>
         <%= render todo_list %>
     <% end %>
   </table>
+  <br>
+
+  <% if current_user.shared_todo_lists %>
+  <h1>Shared Todos</h1>
+    <table id="todo_lists" class="table table-bordered table-striped">
+      <tr>
+        <thead>
+          <th>Shared Todo's Name </th>
+          <th>Shared Todo's User </th>
+        </thead>
+      </tr>
+      <% current_user.shared_todo_lists.each do |shared_todo_list| %>
+          <%= render shared_todo_list %>
+      <% end %>
+    </table>
+  <% end %>
 <%= link_to "New Todo List", new_todo_list_path, class: "btn btn-primary" %>

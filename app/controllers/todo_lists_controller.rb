@@ -44,6 +44,12 @@ class TodoListsController < ApplicationController
     @todo_list = current_user.todo_lists.find(params[:id])
   end
 
+  def set_shared_todo_list
+    if @todo_list
+      @shared_todo_list = @todo_list.shared_todo_lists.find(params[:id])
+    end
+  end
+
   def todo_list_params
     params.require(:todo_list).permit(:name, :user_id)
   end

@@ -1,6 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <h1><%= @todo_list.name %></h1>
+
+<h3>Share this Todo List</h3>
+<%= form_with url: shared_todo_lists_path, method: :post do |f| %>
+  <div>
+    <%= label_tag :email, "Enter the email of the user to share with:" %>
+    <%= text_field_tag :email, nil, placeholder: "User's email" %>
+  </div>
+  <%= hidden_field_tag :todo_list_id, @todo_list.id %>
+  <%= submit_tag "Share Todo List" %>
+<% end %>
+
 <br>
 <table class="table table-bordered table-striped">
   <thead>

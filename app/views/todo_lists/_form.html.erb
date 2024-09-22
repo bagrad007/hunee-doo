@@ -17,6 +17,11 @@
   </div>
 
   <div>
+    <%= form.label :share_todo_list_with_user, style: "display: block" %>
+    <%= form.text_field :share_todo_lists, style: "display: block", class: "input" %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
