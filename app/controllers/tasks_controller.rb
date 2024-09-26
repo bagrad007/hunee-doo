@@ -4,26 +4,26 @@ class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :update, :edit, :destroy ]
 
   def index
-    @tasks = @todo_list.tasks.all
+    if current_user
+      @tasks = current_user.tasks
+    end
   end
 
   def new
-    @todo_list = current_user.todo_lists.find(params[:todo_list_id])
     @task = @todo_list.tasks.new
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def show
   end
 
+  def edit
+  end
+
   def create
-    @task = @todo_list.tasks.new(task_params[:todo_list_id])
+    @task = @todo_list.tasks.new(todo_list_id: @todo_list.id, title: task_params[:title], completed: task_params[:completed])
 
     if @task.save
-      redirect_to tasks_path, notice: "Task created!"
+      redirect_to todo_list_path(@todo_list), notice: "Task created!"
     else
       @tasks = @todo_list.tasks
       render :new
@@ -32,24 +32,25 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "Task updated!"
+      redirect_to todo_list_path(@task.todo_list_id), notice: "Task updated!"
     else
-      redirect_to tasks_path, alert: "Task update failed!"
+      redirect_to todo_list_path(@task.todo_list_id), alert: "Task update failed!"
     end
   end
 
   def destroy
     @task.destroy
+    redirect_to todo_list_path(@task.todo_list_id), notice: "Task deleted!"
   end
 
   private
 
   def set_todo_list
-    @todo_list = current_user.todo_lists.find(params[:todo_list_id])
+    @todo_list = TodoList.find_by(id: params[:todo_list_id]) || TodoList.find_by(id: task_params[:todo_list_id])
   end
 
   def set_task
-    @task = Task.find(task_params[:id])
+    @task = Task.find(params[:id]) || Task.find(task_params["id"])
   end
 
   def task_params

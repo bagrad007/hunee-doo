@@ -1,14 +1,12 @@
-<tr>
-  <% if task.title %>
-    <th>
-      <strong>Title:</strong>
-      <strong>Completed:</strong>
-    </th>
+<tbody>
+  <tr>
     <td>
       <%= task.title %>
     </td>
     <td>
-      <%= task.completed %>
+      <%= task.completed ? "" : "Not Done" %>
     </td>
-<% end %>
-</tr>
+    <td><%= link_to "Edit", edit_task_path(task), class: "btn btn-secondary" %></td>
+    <td><%= button_to "Delete", task, method: :delete, class: "btn btn-danger" %></td>
+  </tr>
+</tbody>

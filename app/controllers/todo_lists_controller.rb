@@ -7,7 +7,6 @@ class TodoListsController < ApplicationController
   end
   def show
     @tasks = @todo_list.tasks
-    @task = @todo_list.tasks.new
   end
 
   def edit
@@ -18,8 +17,9 @@ class TodoListsController < ApplicationController
   end
 
   def create
-    @todo_list = current_user.todo_lists.new(todo_list_params)
+    @todo_list = current_user.todo_lists.new(todo_list_params.except(:email))
     if @todo_list.save
+      create_shared_todo_list if should_create_shared_todo_list?
       redirect_to todo_lists_path, notice: "Todo list was successfully created."
     else
       render :new
@@ -45,7 +45,25 @@ class TodoListsController < ApplicationController
     @todo_list = current_user.todo_lists.find(params[:id])
   end
 
+  def set_shared_todo_list
+    if @todo_list
+      @shared_todo_list = @todo_list.shared_todo_lists.find(params[:id])
+    end
+  end
+
+  def should_create_shared_todo_list?
+    todo_list_params[:email] && todo_list_params[:email] != current_user.email
+  end
+
+  def create_shared_todo_list
+    user = User.find_by(email: todo_list_params[:email])
+    SharedTodoList.create(
+        todo_list_id: @todo_list.id,
+        user_id: user.id
+      )
+  end
+
   def todo_list_params
-    params.require(:todo_list).permit(:name, :user_id)
+    params.require(:todo_list).permit(:name, :user_id, :email)
   end
 end

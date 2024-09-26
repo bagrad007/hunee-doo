@@ -1,16 +1,12 @@
 <tr>
-  <th>
-    <strong>Name: |</strong>
-  </th>
-  <th>
-    <strong>User: |</strong>
-  </th>
-</tr>
-<tr>
-  <td>
-    <%= todo_list.name %>
-  </td>
-  <td>
-    <%= todo_list.user.email %>
-  </td>
+  <td><%= todo_list.name %></td>
+  <td><%= todo_list.user.email %></td>
+  <% if @shared_todo_list %>
+    <td><%= @shared_todo_list.todo_list.user %></td>
+    <% else %>
+    <td> None </td>
+  <% end %>
+  <td><%= link_to "Show", todo_list, class: "btn btn-success" %></td>
+  <td><%= link_to "Edit", edit_todo_list_path(todo_list), class: "btn btn-secondary" %></td>
+  <td><%= button_to "Delete", todo_list, method: :delete, class: "btn btn-danger" %></td>
 </tr>
