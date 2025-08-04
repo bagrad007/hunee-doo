@@ -1,0 +1,13 @@
+<h1>Shared Todo Lists</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'shared_todo_list', collection: @shared_todo_lists %>
+  </tbody>
+</table>

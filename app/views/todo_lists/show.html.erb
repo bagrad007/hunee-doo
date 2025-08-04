@@ -12,6 +12,24 @@
   <%= submit_tag "Share Todo List" %>
 <% end %>
 
+<h3>Shared With</h3>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @todo_list.shared_todo_lists.each do |shared| %>
+      <tr>
+        <td><%= shared.user.email %></td>
+        <td><%= button_to 'Unshare', shared_todo_list_path(shared), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <br>
 <table class="table table-bordered table-striped">
   <thead>

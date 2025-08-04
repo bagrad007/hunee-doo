@@ -1,4 +1,5 @@
 class SharedTodoListsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_shared_todo_list, only: [ :destroy, :show ]
   before_action :set_user_to_share_with, only: [ :create ]
   before_action :set_todo_list_to_share_with, only: [ :create ]
@@ -8,6 +9,7 @@ class SharedTodoListsController < ApplicationController
   end
 
   def show
+    @tasks = @shared_todo_list.todo_list.tasks
   end
 
   def new
@@ -38,7 +40,7 @@ class SharedTodoListsController < ApplicationController
   private
 
   def set_shared_todo_list
-    @shared_todo_list = SharedTodoList.find(params[:todo_list_id])
+    @shared_todo_list = SharedTodoList.find(params[:id])
   end
 
   def set_user_to_share_with

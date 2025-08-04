@@ -1,1 +1,17 @@
-<p><%= @shared_todo_lists.todo_list %> Hello</p>
+<h1><%= @shared_todo_list.todo_list.name %></h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Completed Status</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'tasks/task', collection: @tasks %>
+  </tbody>
+</table>
+
+<%= button_to 'Unshare Todo List', @shared_todo_list, method: :delete, data: { confirm: 'Are you sure?' } %>

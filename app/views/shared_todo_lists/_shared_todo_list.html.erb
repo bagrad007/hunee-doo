@@ -1,4 +1,4 @@
 <tr>
-  <td><%= shared_todo_list.todo_list.name %></td>
+  <td><%= link_to shared_todo_list.todo_list.name, shared_todo_list_path(shared_todo_list) %></td>
   <td><%= shared_todo_list.todo_list.user.email %></td>
 </tr>
